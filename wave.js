@@ -20,7 +20,7 @@ class Wave{
 		point(this.pX, this.pY);
 	}
 	update(){
-		let temp = this.phase + time * this.frequency / PI / 2 / fR;
+		let temp = this.phase / PI / 2 / fR + time * this.frequency / PI / 2 / fR;
 		this.pX = this.posX + this.r * cos(temp);
 		this.pY = this.posY + this.r * sin(temp);
 	}

@@ -1,11 +1,12 @@
 // parameters
 let time = 0;
-let fR = 25;
+let fR = 60;
 let start = false;
 //arrays
 let wavesData = [];
 let wavesUpdatingData = [];
-let sumArray = [];
+let wavesY = []; // blue points data
+let wavesX = []; // green points data
 //objects
 let randomCircle;
 //DOM
@@ -64,20 +65,25 @@ function draw(){
 			wavesUpdatingData[i].posX = wavesUpdatingData[i - 1].pX;
 			wavesUpdatingData[i].posY = wavesUpdatingData[i - 1].pY;
 			if(i + 1 === wavesUpdatingData.length){
-				sumArray.unshift(wavesUpdatingData[i].pY);
+				wavesY.unshift(wavesUpdatingData[i].pY);
+				wavesX.unshift(wavesUpdatingData[i].pX);
 			}
 		}
 
 
 		time++;
-		if(sumArray.length > 500){
-			sumArray.pop();
+		if(wavesY.length > 750){
+			wavesY.pop();
+			wavesX.pop();
 		}
-		for(let i = 0; i < sumArray.length; i++){
-			stroke(0,0,255);
+		for(let i = 0; i < wavesY.length; i++){
+			stroke(0, 0, 255); 
 			strokeWeight(2);
-			point(400 + i , sumArray[i]);
+			point(400 + i , wavesY[i]);
+			stroke(0, 255, 0); 
+			point(wavesX[i] , wavesY[i]); 
 		}
-		line(wavesUpdatingData[wavesUpdatingData.length-1].pX, wavesUpdatingData[wavesUpdatingData.length-1].pY, 400,sumArray[0])
+		stroke(0, 0, 0); 
+		line(wavesUpdatingData[wavesUpdatingData.length-1].pX, wavesUpdatingData[wavesUpdatingData.length-1].pY, 400,wavesY[0])
 	}
 }
